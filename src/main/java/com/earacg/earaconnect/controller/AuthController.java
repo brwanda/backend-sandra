@@ -119,6 +119,11 @@ public class AuthController {
         return ResponseEntity.ok(Map.of("success", true));
     }
 
+    @GetMapping("/health")
+    public ResponseEntity<?> health() {
+        return ResponseEntity.ok(Map.of("status", "UP"));
+    }
+
     @GetMapping("/current-user")
     public ResponseEntity<?> getCurrentUser(HttpServletRequest request) {
         try {

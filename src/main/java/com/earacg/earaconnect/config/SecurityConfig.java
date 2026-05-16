@@ -42,7 +42,8 @@ public class SecurityConfig {
                 .securityContext(ctx -> ctx.securityContextRepository(securityContextRepository()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/login", "/api/auth/logout", "/api/auth/forgot-password",
-                                "/api/auth/reset-password", "/api/auth/test-email", "/api/auth/current-user")
+                                "/api/auth/reset-password", "/api/auth/test-email", "/api/auth/current-user",
+                                "/api/auth/health")
                         .permitAll()
                         // Block test/debug endpoints entirely
                         .requestMatchers("/api/test/**", "/api/email-test/**", "/api/debug/**").denyAll()
@@ -92,8 +93,15 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(
-                Arrays.asList("http://localhost:3000", "http://localhost:3001", "http://localhost:3002","https://backend-sandra-production.up.railway.app"));
+        // Build allowed origins list, filtering out empty strings
+        List<String> allowedOrigins = new java.util.ArrayList<>(Arrays.asList(
+                "http://localhost:3000", "http://localhost:3001", "http://localhost:3002",
+                "https://backend-sandra-production.up.railway.app"));
+        String frontendUrl = System.getenv("FRONTEND_URL");
+        if (frontendUrl != null && !frontendUrl.isBlank()) {
+            allowedOrigins.add(frontendUrl);
+        }
+        configuration.setAllowedOrigins(allowedOrigins);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setExposedHeaders(Arrays.asList("Set-Cookie", "JSESSIONID"));
