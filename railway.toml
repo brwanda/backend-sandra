@@ -1,0 +1,10 @@
+[build]
+builder = "nixpacks"
+buildCommand = "./mvnw clean package -DskipTests"
+
+[deploy]
+startCommand = "java -jar target/earaconnect-0.0.1-SNAPSHOT.jar"
+healthcheckPath = "/api/auth/current-user"
+healthcheckTimeout = 120
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
