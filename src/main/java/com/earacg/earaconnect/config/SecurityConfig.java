@@ -96,7 +96,7 @@ public class SecurityConfig {
         // Build allowed origins list, filtering out empty strings
         List<String> allowedOrigins = new java.util.ArrayList<>(Arrays.asList(
                 "http://localhost:3000", "http://localhost:3001", "http://localhost:3002",
-                "https://backend-sandra-production.up.railway.app"));
+                "https://backend-sandra-production.up.railway.app","https://redesigned-disco-wr7rqqj7w5wxc9j5g-3000.app.github.dev"));
         String frontendUrl = System.getenv("FRONTEND_URL");
         if (frontendUrl != null && !frontendUrl.isBlank()) {
             allowedOrigins.add(frontendUrl);
