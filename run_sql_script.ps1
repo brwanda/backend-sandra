@@ -1,7 +1,7 @@
 # PowerShell script to run SQL migration
 # This script adds the commissioner_general column to the country_committee_member table
 
-$connectionString = "Host=localhost;Database=eara_connect_db-final-EARA10;Username=postgres;Password=bernard123"
+$connectionString = "Host=postgres.railway.internal;Database=railway;Username=postgres;Password=ULYdTAOfswiXngTPBcwTyzXYJumPfiIb"
 
 # Read the SQL script
 $sqlScript = Get-Content -Path "add_commissioner_general_column.sql" -Raw
@@ -25,11 +25,11 @@ try {
     # Alternative approach using psql if available
     Write-Host "Trying alternative approach with psql..."
     try {
-        $env:PGPASSWORD = "bernard123"
-        psql -h localhost -U postgres -d eara_connect_db-final-EARA10 -f add_commissioner_general_column.sql
+        $env:PGPASSWORD = "ULYdTAOfswiXngTPBcwTyzXYJumPfiIb"
+        psql -h postgres.railway.internal -U postgres -d railway -f add_commissioner_general_column.sql
         Write-Host "SQL script executed successfully using psql"
     } catch {
         Write-Host "Both approaches failed. Please run the SQL script manually:"
-        Write-Host "psql -h localhost -U postgres -d eara_connect_db-final-EARA10 -f add_commissioner_general_column.sql"
+        Write-Host "psql -h postgres.railway.internal -U postgres -d railway -f add_commissioner_general_column.sql"
     }
 }

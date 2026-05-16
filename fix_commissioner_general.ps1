@@ -10,16 +10,16 @@ Start-Sleep -Seconds 2
 Write-Host "📋 Step 2: Running database migration..." -ForegroundColor Yellow
 try {
     # Try to use psql if available
-    $env:PGPASSWORD = "bernard123"
+    $env:PGPASSWORD = "ULYdTAOfswiXngTPBcwTyzXYJumPfiIb"
     $sqlScript = Get-Content -Path "add_commissioner_general_column.sql" -Raw
     
     # Execute SQL directly using psql
-    $sqlScript | psql -h localhost -U postgres -d eara_connect_db-final-EARA10
+    $sqlScript | psql -h postgres.railway.internal -U postgres -d railway
     
     Write-Host "✅ Database migration completed successfully!" -ForegroundColor Green
 } catch {
     Write-Host "⚠️ Could not run database migration automatically. Please run manually:" -ForegroundColor Yellow
-    Write-Host "psql -h localhost -U postgres -d eara_connect_db-final-EARA10 -f add_commissioner_general_column.sql" -ForegroundColor Cyan
+    Write-Host "psql -h postgres.railway.internal -U postgres -d railway -f add_commissioner_general_column.sql" -ForegroundColor Cyan
 }
 
 # Step 3: Start backend server

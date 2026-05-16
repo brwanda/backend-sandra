@@ -112,7 +112,7 @@ WHERE email = 'ngogasandra6@gmail.com';
 ### Step 1: Run Diagnostic SQL
 ```bash
 # Connect to your database
-psql -U postgres -d eara_connect_db-final-EARA10
+psql -U postgres -d railway
 
 # Run the diagnostic script
 \i fix_committee_members_issues.sql

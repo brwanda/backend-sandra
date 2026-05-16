@@ -5,11 +5,11 @@
 # =====================================================================
 
 # Database configuration (from application.properties)
-$DB_HOST = "localhost"
+$DB_HOST = "postgres.railway.internal"
 $DB_PORT = "5432"
-$DB_NAME = "eara_connect_db-final-EARA10"
+$DB_NAME = "railway"
 $DB_USER = "postgres"
-$DB_PASSWORD = "123"
+$DB_PASSWORD = "ULYdTAOfswiXngTPBcwTyzXYJumPfiIb"
 
 # SQL file to execute
 $SQL_FILE = "migrate_hod_to_committee_table_safe.sql"

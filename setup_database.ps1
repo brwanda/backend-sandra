@@ -6,12 +6,12 @@ Write-Host "🔧 Setting up database with test data..." -ForegroundColor Green
 # Check if PostgreSQL is running
 Write-Host "Checking PostgreSQL connection..." -ForegroundColor Yellow
 try {
-    $testConnection = psql -h localhost -U postgres -d eara_connect -c "SELECT 1;" 2>$null
+    $testConnection = psql -h postgres.railway.internal -U postgres -d railway -c "SELECT 1;" 2>$null
     if ($LASTEXITCODE -eq 0) {
         Write-Host "✅ PostgreSQL is running" -ForegroundColor Green
     } else {
         Write-Host "❌ PostgreSQL is not running or connection failed" -ForegroundColor Red
-        Write-Host "Please start PostgreSQL and ensure the database 'eara_connect' exists" -ForegroundColor Yellow
+        Write-Host "Please start PostgreSQL and ensure the database 'railway' exists" -ForegroundColor Yellow
         exit 1
     }
 } catch {
@@ -22,7 +22,7 @@ try {
 # Run the setup script
 Write-Host "Running setup_test_data.sql..." -ForegroundColor Yellow
 try {
-    psql -h localhost -U postgres -d eara_connect -f setup_test_data.sql
+    psql -h postgres.railway.internal -U postgres -d railway -f setup_test_data.sql
     if ($LASTEXITCODE -eq 0) {
         Write-Host "✅ Database setup completed successfully!" -ForegroundColor Green
     } else {
@@ -47,7 +47,7 @@ UNION ALL
 SELECT 'Resolutions for subcommittee 1:' as test, COUNT(*) as result FROM resolution_assignments WHERE subcommittee_id = 1;
 "@
     
-    $results = psql -h localhost -U postgres -d eara_connect -c $testQuery
+    $results = psql -h postgres.railway.internal -U postgres -d railway -c $testQuery
     Write-Host "Database test results:" -ForegroundColor Cyan
     Write-Host $results
 } catch {
