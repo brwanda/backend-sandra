@@ -118,12 +118,10 @@ public class AuthController {
         SecurityContextHolder.clearContext();
         return ResponseEntity.ok(Map.of("success", true));
     }
-
-    @GetMapping("/health")
+ @GetMapping("/health")
     public ResponseEntity<?> health() {
         return ResponseEntity.ok(Map.of("status", "UP"));
     }
-
     @GetMapping("/current-user")
     public ResponseEntity<?> getCurrentUser(HttpServletRequest request) {
         try {
