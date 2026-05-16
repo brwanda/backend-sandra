@@ -1,0 +1,1 @@
+ALTER TABLE sub_tasks ADD COLUMN IF NOT EXISTS progress_note TEXT;
