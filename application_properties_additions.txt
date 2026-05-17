@@ -1,0 +1,11 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# ADD these lines to your src/main/resources/application.properties
+# (or application.yml equivalent)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# JWT secret — override this in Railway env vars as JWT_SECRET
+jwt.secret=${JWT_SECRET:fallback-secret-only-for-local-dev-change-in-prod}
+
+# Frontend URL for CORS — set FRONTEND_URL in Railway env vars
+# e.g. https://front-end-sandra.vercel.app
+frontend.url=${FRONTEND_URL:https://front-end-sandra.vercel.app}
