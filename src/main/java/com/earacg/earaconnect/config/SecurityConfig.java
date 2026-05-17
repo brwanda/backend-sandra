@@ -95,8 +95,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         // Build allowed origins list, filtering out empty strings
         List<String> allowedOrigins = new java.util.ArrayList<>(Arrays.asList(
-                "http://localhost:3000","https://front-end-sandra.vercel.app", "http://localhost:3001", "http://localhost:3002",
-                "https://backend-sandra-production.up.railway.app","https://redesigned-disco-wr7rqqj7w5wxc9j5g-3000.app.github.dev"));
+                "http://localhost:3000","https://earaconnect.vercel.app","https://front-end-sandra.vercel.app", "http://localhost:3001", "http://localhost:3002"));
         String frontendUrl = System.getenv("FRONTEND_URL");
         if (frontendUrl != null && !frontendUrl.isBlank()) {
             allowedOrigins.add(frontendUrl);
