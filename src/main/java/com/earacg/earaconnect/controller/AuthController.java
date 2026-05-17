@@ -32,54 +32,79 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-    try {
-        // ── 1. Find the user ──────────────────────────────────────────────
-        // Replace "userRepository.findByEmail" with whatever method you use
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElse(null);
- 
-        if (user == null || !user.isActive()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("success", false, "message", "Invalid email or password"));
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest, HttpServletRequest request) {
+        String email = loginRequest.get("email");
+        String password = loginRequest.get("password");
+
+        if (email == null || password == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Email and password are required"));
         }
- 
-        // ── 2. Check password ─────────────────────────────────────────────
-        // Replace "passwordEncoder.matches" if you use a different method
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("success", false, "message", "Invalid email or password"));
+
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(email, password));
+            if (authentication != null && authentication.isAuthenticated()) {
+
+                // Preserve original side effects on successful login
+                userService.recordSuccessfulLogin(email);
+
+                // Persist authentication in session for subsequent requests
+                SecurityContext context = SecurityContextHolder.createEmptyContext();
+                context.setAuthentication(authentication);
+                SecurityContextHolder.setContext(context);
+                // Always write context to session (create session if absent)
+                HttpSession httpSession = request.getSession(true);
+                httpSession.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
+
+                User user = userService.getUserByEmail(email).orElse(null);
+                if (user != null) {
+                    // Build a safe DTO map — do NOT serialize the raw JPA entity directly.
+                    // Direct entity serialization can trigger LazyInitializationException
+                    // (Hibernate session closed) or infinite recursion on bidirectional
+                    // relationships, both of which produce a 500 with an empty body.
+                    Map<String, Object> userDto = new HashMap<>();
+                    userDto.put("id", user.getId());
+                    userDto.put("email", user.getEmail());
+                    userDto.put("name", user.getName());
+                    userDto.put("phone", user.getPhone());
+                    userDto.put("role", user.getRole() != null ? user.getRole().name() : null);
+                    userDto.put("active", user.isActive());
+
+                    // Include subcommittee info for Chair/Member dashboards
+                    if (user.getSubcommittee() != null) {
+                        Map<String, Object> subcommitteeDto = new HashMap<>();
+                        subcommitteeDto.put("id", user.getSubcommittee().getId());
+                        subcommitteeDto.put("name", user.getSubcommittee().getName());
+                        userDto.put("subcommittee", subcommitteeDto);
+                        userDto.put("subcommitteeId", user.getSubcommittee().getId());
+                    }
+
+                    // Include country info for HOD scoping
+                    if (user.getCountry() != null) {
+                        Map<String, Object> countryDto = new HashMap<>();
+                        countryDto.put("id", user.getCountry().getId());
+                        countryDto.put("name", user.getCountry().getName());
+                        userDto.put("country", countryDto);
+                        userDto.put("countryId", user.getCountry().getId());
+                    }
+
+                    Map<String, Object> response = new HashMap<>();
+                    response.put("success", true);
+                    response.put("user", userDto);
+                    return ResponseEntity.ok(response);
+                }
+            }
+        } catch (org.springframework.security.authentication.BadCredentialsException ex) {
+            return ResponseEntity.status(401).body(Map.of("error", "Invalid email or password"));
+        } catch (org.springframework.security.authentication.DisabledException ex) {
+            return ResponseEntity.status(401).body(Map.of("error", "Account is inactive. Please contact administrator."));
+        } catch (org.springframework.security.core.userdetails.UsernameNotFoundException ex) {
+            return ResponseEntity.status(401).body(Map.of("error", "Account not found. Please check your email."));
+        } catch (Exception ex) {
+            return ResponseEntity.status(401).body(Map.of("error", "Invalid email or password"));
         }
- 
-        // ── 3. Generate JWT ───────────────────────────────────────────────
-        String token = jwtUtil.generateToken(
-                user.getEmail(),
-                user.getRole().name(),   // adjust if your role is stored differently
-                user.getId()
-        );
- 
-        // ── 4. Build user DTO (same shape as before) ──────────────────────
-        Map<String, Object> userDto = new HashMap<>();
-        userDto.put("id",    user.getId());
-        userDto.put("name",  user.getName());
-        userDto.put("email", user.getEmail());
-        userDto.put("role",  user.getRole().name());
-        userDto.put("active", user.isActive());
-        // Add any other fields your frontend reads from user
- 
-        // ── 5. Return token + user in response body ───────────────────────
-        return ResponseEntity.ok(Map.of(
-                "success", true,
-                "token",   token,    // <── NEW: frontend saves this as authToken
-                "user",    userDto
-        ));
- 
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Map.of("success", false, "message", "Server error during login"));
+        return ResponseEntity.status(401).body(Map.of("error", "Invalid email or password"));
     }
-}
- 
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
