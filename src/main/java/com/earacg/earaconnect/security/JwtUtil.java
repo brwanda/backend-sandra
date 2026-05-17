@@ -1,6 +1,9 @@
 package com.earacg.earaconnect.security;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -18,7 +21,9 @@ public class JwtUtil {
     private static final long EXPIRATION_MS = 8 * 60 * 60 * 1000L;
 
     private Key getKey() {
-        return Keys.hmacShaKeyFor(secret.getBytes());
+        // Secret must be at least 32 characters for HS256
+        byte[] keyBytes = secret.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String generateToken(String email, String role, Long userId) {
