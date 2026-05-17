@@ -87,7 +87,7 @@ public class SecurityConfig {
      */
     @Bean
     public CookieSameSiteSupplier cookieSameSiteSupplier() {
-        return CookieSameSiteSupplier.ofLax();
+        return CookieSameSiteSupplier.ofNone(); // ✅
     }
 
     @Bean
