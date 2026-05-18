@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-@Configuration
+// @Configuration -- disabled: using Resend HTTP API instead of SMTP
 public class EmailConfig {
 
     @Value("${spring.mail.host:smtp.gmail.com}")
