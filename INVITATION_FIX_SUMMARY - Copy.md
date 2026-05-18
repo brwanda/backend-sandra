@@ -55,7 +55,7 @@ cd EARACONNECT-BACKEND-master
 ```
 
 ### Step 2: Test Email Configuration
-1. Navigate to `http://localhost:3000/email-test`
+1. Navigate to `https://earaconnect.vercel.app/email-test`
 2. Click "Test Email Configuration"
 3. Verify the configuration is working
 
@@ -65,7 +65,7 @@ cd EARACONNECT-BACKEND-master
 3. Check if emails are received
 
 ### Step 4: Test the Invitation System
-1. Navigate to `http://localhost:3000/invitation-test`
+1. Navigate to `https://earaconnect.vercel.app/invitation-test`
 2. Enter a valid meeting ID and user IDs
 3. Click "Test Invitation System"
 4. Check the backend logs for detailed information

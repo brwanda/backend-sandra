@@ -256,7 +256,7 @@ npm start
 ```
 
 ### 2. Login as Admin
-- Navigate to `http://localhost:3000/login`
+- Navigate to `https://earaconnect.vercel.app/login`
 - Email: `admin@earaconnect.com`
 - Password: `admin123`
 

@@ -133,7 +133,7 @@ try {
 Write-Host "`n🎯 Next Steps:" -ForegroundColor Cyan
 Write-Host "1. If email tests failed, check the backend logs for SMTP errors" -ForegroundColor White
 Write-Host "2. Verify Gmail app password is correct in application.properties" -ForegroundColor White
-Write-Host "3. Test the frontend invitation system at: http://localhost:3000/email-test" -ForegroundColor White
+Write-Host "3. Test the frontend invitation system at: https://earaconnect.vercel.app/email-test" -ForegroundColor White
 Write-Host "4. Check browser console for detailed error messages" -ForegroundColor White
 
 Write-Host "`n✅ Email functionality test completed!" -ForegroundColor Green

@@ -152,7 +152,7 @@ npm start
 
 ### 3. Test the Fix
 
-1. Navigate to **Add Member** page (`localhost:3000/members/new`)
+1. Navigate to **Add Member** page (`earaconnect.vercel.app/members/new`)
 2. Select **"Committee Member"** as the entry type
 3. Select a country
 4. Open the **Committee** dropdown

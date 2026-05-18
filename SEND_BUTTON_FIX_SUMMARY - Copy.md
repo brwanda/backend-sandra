@@ -101,7 +101,7 @@ onClick={() => {
 ## How to Test the Fix
 
 ### Step 1: Verify Button Functionality
-1. Navigate to `http://localhost:3000/button-test`
+1. Navigate to `https://earaconnect.vercel.app/button-test`
 2. Click "Test Button Click" to verify buttons work
 3. Click "Test API Connection" to verify backend connectivity
 4. Click "Test Invitation API" to test the invitation endpoint

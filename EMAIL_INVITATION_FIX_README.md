@@ -41,7 +41,7 @@ The meeting invitation email sending functionality was not working properly. Use
    ```
 
 3. Or test via the frontend:
-   - Navigate to `http://localhost:3000/email-test`
+   - Navigate to `https://earaconnect.vercel.app/email-test`
    - Click "Test Email Configuration"
    - Check the results
 
@@ -57,7 +57,7 @@ spring.mail.password=xqbvibnyjemsnuqs
 **Important**: The Gmail app password might need to be regenerated if it's expired.
 
 ### Step 3: Test Email Sending
-1. Use the test component at `http://localhost:3000/email-test`
+1. Use the test component at `https://earaconnect.vercel.app/email-test`
 2. Enter a valid email address
 3. Try both "Send Test Email" and "Send Test Invitation"
 4. Check if emails are received

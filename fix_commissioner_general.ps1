@@ -45,5 +45,5 @@ Write-Host "📋 Step 6: Starting frontend server..." -ForegroundColor Yellow
 Start-Process -FilePath "powershell" -ArgumentList "-NoExit", "-Command", "cd '../EARACONNECT-FRONTEND-master'; npm start" -WindowStyle Normal
 
 Write-Host "🎉 Setup complete! Please check the server windows for any errors." -ForegroundColor Green
-Write-Host "Frontend should be available at: http://localhost:3000" -ForegroundColor Cyan
+Write-Host "Frontend should be available at: https://earaconnect.vercel.app" -ForegroundColor Cyan
 Write-Host "Backend should be available at: http://localhost:8081" -ForegroundColor Cyan

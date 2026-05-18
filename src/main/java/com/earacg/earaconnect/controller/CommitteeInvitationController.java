@@ -74,7 +74,7 @@ public class CommitteeInvitationController {
         @RequestMapping(value = "/send/{meetingId}", method = RequestMethod.OPTIONS)
         public ResponseEntity<?> handleOptions(@PathVariable Long meetingId) {
                 return ResponseEntity.ok()
-                                .header("Access-Control-Allow-Origin", "http://localhost:3000")
+                                .header("Access-Control-Allow-Origin", "http://localhost:3000","https://earaconnect.vercel.app")
                                 .header("Access-Control-Allow-Methods", "POST, OPTIONS")
                                 .header("Access-Control-Allow-Headers", "Content-Type, Authorization")
                                 .build();

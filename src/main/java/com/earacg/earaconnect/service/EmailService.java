@@ -78,7 +78,7 @@ public class EmailService {
                     "📧 Email: " + email + "\n" +
                     "🔑 Password: " + password + "\n\n" +
                     "🌐 **System Access:**\n" +
-                    "• Login URL: http://localhost:3000/login\n" +
+                    "• Login URL: https://earaconnect.vercel.app/login\n" +
                     "• Access all Commissioner General features\n" +
                     "• Manage committees and subcommittees\n" +
                     "• Review reports and resolutions\n\n" +
@@ -121,7 +121,7 @@ public class EmailService {
                     "📧 Email: " + email + "\n" +
                     "🔑 Password: " + password + "\n\n" +
                     "🌐 **System Access:**\n" +
-                    "• Login URL: http://localhost:3000/login\n" +
+                    "• Login URL: https://earaconnect.vercel.app/login\n" +
                     "• Access all Head of Delegation features\n" +
                     "• Review and approve reports\n" +
                     "• Manage delegation activities\n" +
@@ -169,7 +169,7 @@ public class EmailService {
                     "📧 Email: " + email + "\n" +
                     "🔑 Password: " + password + "\n\n" +
                     "🌐 **System Access:**\n" +
-                    "• Login URL: http://localhost:3000/login\n" +
+                    "• Login URL: https://earaconnect.vercel.app/login\n" +
                     "• Access your committee features\n" +
                     "• Participate in meetings and discussions\n" +
                     "• Submit and review reports\n\n" +
@@ -360,7 +360,7 @@ public class EmailService {
                     "To reset your password, please use the following token:\n\n" +
                     resetToken + "\n\n" +
                     "Or click the link below to reset your password:\n" +
-                    "http://localhost:3000/reset-password?token=" + resetToken + "\n\n" +
+                    "https://earaconnect.vercel.app/reset-password?token=" + resetToken + "\n\n" +
                     "This link will expire in 24 hours.\n\n" +
                     "If you did not request a password reset, please ignore this email.\n\n" +
                     "Best regards,\n" +

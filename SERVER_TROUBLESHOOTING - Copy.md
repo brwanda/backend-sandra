@@ -175,7 +175,7 @@ npm start
 ```
 
 ### 3. Access Application
-- Frontend: http://localhost:3000
+- Frontend: https://earaconnect.vercel.app
 - Backend API: http://localhost:8080
 - Admin Login: admin@earaconnect.com / admin123
 
