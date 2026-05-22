@@ -62,6 +62,7 @@ public class EmailService {
             "Your login credentials are:\n" +
             "Email: " + email + "\n" +
             "Password: " + password + "\n\n" +
+            "Login URL: " + frontendUrl + "/login\n\n" +
             "Please change your password after your first login.\n\n" +
             "Best regards,\nEaraConnect System Team");
     }
