@@ -70,35 +70,30 @@ public class EmailService {
     public void sendCommissionerGeneralCredentials(String email, String name, String password) {
         log.info("Attempting to send Commissioner General credentials email to: {}", email);
         sendEmail(email,
-            "Welcome to EaraConnect - Your Commissioner General Account Credentials",
-            "Dear Commissioner General " + name + ",\n\n" +
-            "Welcome to the EaraConnect EARA CONNECT Project!\n\n" +
-            "Your account has been successfully created with Commissioner General privileges.\n\n" +
-            "Your Login Credentials:\n" +
+            "Your EaraConnect System Credentials",
+            "Dear " + name + ",\n\n" +
+            "Your account has been created in the EaraConnect System.\n\n" +
+            "Your login credentials are:\n" +
             "Email: " + email + "\n" +
             "Password: " + password + "\n\n" +
             "Login URL: " + frontendUrl + "/login\n\n" +
-            "Security Notice:\n" +
-            "Please change your password after your first login.\n" +
-            "Keep your credentials secure and confidential.\n\n" +
-            "Best regards,\nEaraConnect System Administration Team\nEARA CONNECT Project");
+            "Please change your password after your first login.\n\n" +
+            "Best regards,\nEaraConnect System Team");
     }
 
     @Async("taskExecutor")
     public void sendHODCredentials(String email, String name, String password) {
         log.info("Attempting to send HOD credentials email to: {}", email);
         sendEmail(email,
-            "Welcome to EaraConnect - Your Head of Delegation Account Credentials",
-            "Dear Head of Delegation " + name + ",\n\n" +
-            "Welcome to the EaraConnect EARA CONNECT Project!\n\n" +
-            "Your account has been successfully created with Head of Delegation privileges.\n\n" +
-            "Your Login Credentials:\n" +
+            "Your EaraConnect System Credentials",
+            "Dear " + name + ",\n\n" +
+            "Your account has been created in the EaraConnect System.\n\n" +
+            "Your login credentials are:\n" +
             "Email: " + email + "\n" +
             "Password: " + password + "\n\n" +
             "Login URL: " + frontendUrl + "/login\n\n" +
-            "Security Notice:\n" +
             "Please change your password after your first login.\n\n" +
-            "Best regards,\nEaraConnect System Administration Team\nEARA CONNECT Project");
+            "Best regards,\nEaraConnect System Team");
     }
 
     @Async("taskExecutor")
@@ -107,17 +102,15 @@ public class EmailService {
         String roleDisplay = role.replace("_", " ").toLowerCase();
         roleDisplay = roleDisplay.substring(0, 1).toUpperCase() + roleDisplay.substring(1);
         sendEmail(email,
-            "Welcome to EaraConnect - Your " + roleDisplay + " Account Credentials",
-            "Dear " + roleDisplay + " " + name + ",\n\n" +
-            "Welcome to the EaraConnect EARA CONNECT Project!\n\n" +
-            "Your account has been successfully created with " + roleDisplay + " privileges.\n\n" +
-            "Your Login Credentials:\n" +
+            "Your EaraConnect System Credentials",
+            "Dear " + name + ",\n\n" +
+            "Your account has been created in the EaraConnect System.\n\n" +
+            "Your login credentials are:\n" +
             "Email: " + email + "\n" +
             "Password: " + password + "\n\n" +
             "Login URL: " + frontendUrl + "/login\n\n" +
-            "Security Notice:\n" +
             "Please change your password after your first login.\n\n" +
-            "Best regards,\nEaraConnect System Administration Team\nEARA CONNECT Project");
+            "Best regards,\nEaraConnect System Team");
     }
 
     @Async("taskExecutor")
